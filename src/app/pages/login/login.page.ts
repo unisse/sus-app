@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSlides, LoadingController, ToastController } from '@ionic/angular';
+import { IonSlides, LoadingController, ToastController, NavController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user';
 // import { AuthService } from 'src/app/services/auth.service';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
@@ -22,7 +22,8 @@ export class LoginPage implements OnInit {
     // private authService: AuthService,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    public keyboard: Keyboard) { }
+    public keyboard: Keyboard,
+    private navCtrl: NavController) { }
 
   ngOnInit() { }
 
@@ -38,6 +39,8 @@ export class LoginPage implements OnInit {
     await this.presentLoading();
 
     console.log("login()");
+    this.navCtrl.navigateRoot('home');
+    this.loading.dismiss();
 
     // try {
     //   await this.authService.login(this.userLogin);
@@ -52,6 +55,12 @@ export class LoginPage implements OnInit {
     await this.presentLoading();
 
     console.log("register()");
+
+    this.presentToast("Usuário criado com sucesso! BRINKSS ainda não funciona");
+
+    this.loading.dismiss();
+
+
 
     // try {
     //   await this.authService.register(this.userRegister);
