@@ -1,34 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { Map, latLng, tileLayer, Layer, marker, leaflet } from 'leaflet';
+import { Component, OnInit } from "@angular/core";
+import { Map, latLng, tileLayer, Layer, marker, leaflet } from "leaflet";
+import { Geolocation } from "@ionic-native/geolocation/ngx";
 
 @Component({
-  selector: 'app-mapa',
-  templateUrl: './mapa.page.html',
-  styleUrls: ['./mapa.page.scss'],
+  selector: "app-mapa",
+  templateUrl: "./mapa.page.html",
+  styleUrls: ["./mapa.page.scss"]
 })
 export class MapaPage implements OnInit {
   map: Map;
 
-  constructor() { }
+  constructor(private geolocation: Geolocation) {}
 
   ngOnInit() {
     // this.leafletMap();
   }
 
-  ionViewDidEnter () {
+  ionViewDidEnter() {
     this.leafletMap();
+    let watch = this.geolocation.watchPosition();
+    watch.subscribe(data => this.gotNewUserLocationData(data));
+  }
+
+  gotNewUserLocationData(data) {
+    // console.log("inside gotNewUserLocationData");
+    // console.log(data);
+    this.map.panTo([data.coords.latitude, data.coords.longitude]);
   }
 
   leafletMap() {
     // In setView add latLng and zoom
-    this.map = new Map('map').setView([28.644800, 77.216721], 10);
-    tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© projeto unisse',
+    this.map = new Map("map").setView([-15.8244864, -47.9510528], 10);
+    tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© projeto unisse"
     }).addTo(this.map);
 
-
-    marker([28.6, 77]).addTo(this.map)
-      .bindPopup('Ionic 4 <br> Leaflet.')
+    marker([-15.8244864, -47.9510528])
+      .addTo(this.map)
+      .bindPopup("Popup!.")
       .openPopup();
   }
 
@@ -36,5 +45,4 @@ export class MapaPage implements OnInit {
   // ionViewWillLeave() {
   //   this.map.remove();
   // }
-
 }
