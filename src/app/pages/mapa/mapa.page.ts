@@ -9,6 +9,7 @@ import { Geolocation } from "@ionic-native/geolocation/ngx";
 })
 export class MapaPage implements OnInit {
   map: Map;
+  public isSearchBarOpened = false;
 
   constructor(private geolocation: Geolocation) {}
 
@@ -41,8 +42,12 @@ export class MapaPage implements OnInit {
       .openPopup();
   }
 
-  // /** Remove map when we have multiple map object */
-  // ionViewWillLeave() {
-  //   this.map.remove();
-  // }
+  /** Remove map when we have multiple map object */
+  ionViewWillLeave() {
+    this.map.remove();
+  }
+
+  onSearch(event) {
+    console.log(event);
+  }
 }
