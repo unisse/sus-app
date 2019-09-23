@@ -11,7 +11,7 @@ export class MapaPage implements OnInit {
   map: Map;
   public isSearchBarOpened = false;
 
-  constructor(private geolocation: Geolocation) {}
+  constructor(private geolocation: Geolocation) { }
 
   ngOnInit() {
     // this.leafletMap();
@@ -49,5 +49,14 @@ export class MapaPage implements OnInit {
 
   onSearch(event) {
     console.log(event);
+  }
+
+  clickOnSearchIcon(searchBarInput) {
+    this.isSearchBarOpened = true;
+    this.setFocusToSearchBar(searchBarInput);
+  }
+
+  setFocusToSearchBar(searchBarInput) {
+    searchBarInput.setFocus();
   }
 }
