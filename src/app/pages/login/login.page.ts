@@ -37,8 +37,8 @@ export class LoginPage implements OnInit {
   async login() {
     await this.presentLoading();
 
-    console.log("login()");
-    this.navCtrl.navigateRoot('home');
+    console.log('login()');
+    this.navCtrl.navigateRoot('mapa');
     this.loading.dismiss();
 
     // try {
@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
 
   async loginComGoogle() {
     await this.authService.doGoogleLogin().then(res => {
-      console.log(res);
+      this.navCtrl.navigateRoot('mapa');
     });
   }
 

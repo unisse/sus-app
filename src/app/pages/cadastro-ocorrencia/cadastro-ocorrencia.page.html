@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>cadastro-ocorrencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list-header>Local da Ocorrência</ion-list-header>
+  <ion-chip>
+    <ion-icon name="checkmark-circle"></ion-icon>
+    <!-- Deve localizar a unidade de saúde com proximidade para abertura de ocorrencia ???-->
+    <ion-label>Hospital Regional de Planaltina</ion-label>
+  </ion-chip>
+
+  <form [formGroup]="form" (ngSubmit)="cadastrar()">
+
+    <ion-item>
+      <ion-label position="stacked">Alguma coisa acontecendo?</ion-label>
+      <ion-textarea required [rows]="5" formControlName="texto"></ion-textarea>
+    </ion-item>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" class="ion-no-margin">Criar Ocorrência</ion-button>
+    </div>
+  </form>
+
+  <ion-item>
+    <ion-label>Tipo de Ocorrência</ion-label>
+    <ion-select okText="Confirmar" cancelText="Cancelar">
+      <ion-select-option *ngFor="let tipo of tipos" [value]="tipo.id">{{tipo.descricao}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+</ion-content>

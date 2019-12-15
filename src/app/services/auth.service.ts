@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import UserCredential = firebase.auth.UserCredential;
+import {Usuario} from '../interfaces/usuario';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +38,31 @@ export class AuthService {
             resolve(res);
           });
     });
+  }
+
+  currentUser(): Observable<Usuario> {
+    return this.afAuth.user.pipe(map(user => this.mapToUsuario(user)));
+  }
+
+  private mapToUsuario(user): Usuario {
+    if (user == null) {
+      return {};
+    }
+    const usuario: Usuario = {
+      uid: user.uid,
+      nome: user.displayName,
+      imagem: user.photoURL,
+      email: user.email
+    };
+    return usuario;
+  }
+
+  public isAuthenticaded(): Observable<boolean> {
+    return this.afAuth.user.pipe(map(user => user != null));
+  }
+
+  public logout(): void {
+    this.afAuth.auth.signOut().then(value => console.log(value));
   }
 
 }

@@ -21,7 +21,8 @@ const routes: Routes = [
   {
     path: 'detalhe-unidade-saude/:id',
     loadChildren: './pages/detalhe-unidade-saude/detalhe-unidade-saude.module#DetalheUnidadeSaudePageModule'
-  }
+  },
+  { path: 'cadastro-ocorrencia', loadChildren: './pages/cadastro-ocorrencia/cadastro-ocorrencia.module#CadastroOcorrenciaPageModule' }
 
 
 ];
