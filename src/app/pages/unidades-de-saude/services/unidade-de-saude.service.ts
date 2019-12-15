@@ -15,9 +15,8 @@ export class UnidadeDeSaudeService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  public find(limit: number): Observable<UnidadeDeSaude[]> {
-    return this.firestore.collection<UnidadeDeSaude>('unidades-de-saude',
-            res => res.orderBy('nome').startAt(0).limit(limit)).valueChanges();
+  public find(id: string): Observable<UnidadeDeSaude> {
+    return this.firestore.collection('unidades-de-saude').doc<UnidadeDeSaude>(id).valueChanges();
   }
 
   first() {

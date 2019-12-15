@@ -14,4 +14,8 @@ export class ItemUnidadeSaudeComponent implements OnInit {
 
   ngOnInit() {}
 
+  goToUnidade(id) {
+    console.log(id);
+  }
+
 }

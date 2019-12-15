@@ -17,7 +17,11 @@ const routes: Routes = [
   },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'mapa', loadChildren: './pages/mapa/mapa.module#MapaPageModule' },
-  { path: 'unidades-de-saude', loadChildren: './pages/unidades-de-saude/unidades-de-saude.module#UnidadesDeSaudePageModule' }
+  { path: 'unidades-de-saude', loadChildren: './pages/unidades-de-saude/unidades-de-saude.module#UnidadesDeSaudePageModule' },
+  {
+    path: 'detalhe-unidade-saude/:id',
+    loadChildren: './pages/detalhe-unidade-saude/detalhe-unidade-saude.module#DetalheUnidadeSaudePageModule'
+  }
 
 
 ];
