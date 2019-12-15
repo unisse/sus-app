@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides, LoadingController, ToastController, NavController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user';
-// import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @Component({
@@ -12,14 +12,13 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 export class LoginPage implements OnInit {
 
   @ViewChild(IonSlides, {static: false}) slides: IonSlides;
-  public wavesPosition: number = 0;
-  private wavesDifference: number = 100;
+
   public userLogin: User = {};
   public userRegister: User = {};
   private loading: any;
 
   constructor(
-    // private authService: AuthService,
+    private authService: AuthService,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
     public keyboard: Keyboard,
@@ -51,6 +50,16 @@ export class LoginPage implements OnInit {
     // }
   }
 
+  async loginComGoogle() {
+    await this.authService.doGoogleLogin().then(res => {
+      console.log(res);
+    });
+  }
+
+  async loginComFacebook() {
+    console.log('futuro!');
+  }
+
   async register() {
     await this.presentLoading();
 
@@ -78,7 +87,7 @@ export class LoginPage implements OnInit {
 
   async presentToast(message: string) {
     const toast = await this.toastCtrl.create({ message, duration: 2000 });
-    toast.present();
+    await toast.present();
   }
 
 }
