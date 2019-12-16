@@ -3,7 +3,7 @@
     <!-- ToolBar when search not clicked -->
     <ion-title *ngIf="!isSearchBarOpened">Olá usuário =)</ion-title>
     <ion-buttons slot="secondary" *ngIf="!isSearchBarOpened">
-      <ion-button (click)="isSearchBarOpened = true">
+      <ion-button (click)="clickOnSearchIcon(searchBarInput)">
         <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -14,11 +14,12 @@
     </ion-buttons>
     <!-- ToolBar when search clicked -->
     <ion-searchbar
-      *ngIf="isSearchBarOpened"
+      [hidden]="!isSearchBarOpened"
       showCancelButton="always"
       animated
       (ionCancel)="isSearchBarOpened = false"
       (ionInput)="onSearch($event)"
+      #searchBarInput
     ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
